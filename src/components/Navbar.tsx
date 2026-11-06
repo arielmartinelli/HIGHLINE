@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { WhatsappIcon } from "./Icons";
 import { WA_GENERICO } from "@/lib/whatsapp";
+import { TEL_DISPLAY } from "@/data/servicios";
 
 const SECCIONES = [
   { href: "#servicios", label: "Lo que hacemos" },
@@ -18,6 +19,8 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!abierto) return;
+
+    document.body.style.overflow = "hidden";
 
     function alClic(e: MouseEvent) {
       const t = e.target as Node;
@@ -39,6 +42,7 @@ export default function Navbar() {
       document.removeEventListener("click", alClic);
       document.removeEventListener("keydown", alaTecla);
       window.removeEventListener("resize", alRedimensionar);
+      document.body.style.overflow = "";
     };
   }, [abierto]);
 
@@ -93,6 +97,9 @@ export default function Navbar() {
           <WhatsappIcon size={17} />
           Consultar por WhatsApp
         </a>
+        <p className="nav-panel-info">
+          {TEL_DISPLAY} · Lun a Vie 9 a 17:30 · Sáb 9 a 13
+        </p>
       </div>
     </nav>
   );
