@@ -1,0 +1,89 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { WhatsappIcon } from "./Icons";
+import { WA_GENERICO } from "@/lib/whatsapp";
+
+const SECCIONES = [
+  { href: "#servicios", label: "Lo que hacemos" },
+  { href: "#proceso", label: "Cómo trabajamos" },
+  { href: "#horarios", label: "Horarios" },
+  { href: "#faq", label: "Preguntas" },
+];
+
+export default function Navbar() {
+  const [abierto, setAbierto] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const burgerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!abierto) return;
+
+    function alClic(e: MouseEvent) {
+      const t = e.target as Node;
+      if (!panelRef.current?.contains(t) && !burgerRef.current?.contains(t)) {
+        setAbierto(false);
+      }
+    }
+    function alaTecla(e: KeyboardEvent) {
+      if (e.key === "Escape") setAbierto(false);
+    }
+    function alRedimensionar() {
+      if (window.innerWidth > 880) setAbierto(false);
+    }
+
+    document.addEventListener("click", alClic);
+    document.addEventListener("keydown", alaTecla);
+    window.addEventListener("resize", alRedimensionar);
+    return () => {
+      document.removeEventListener("click", alClic);
+      document.removeEventListener("keydown", alaTecla);
+      window.removeEventListener("resize", alRedimensionar);
+    };
+  }, [abierto]);
+
+  return (
+    <nav className="nav">
+      <div className="wrap nav-in">
+        <a className="logo" href="#top">
+          HIGH<span>LINE</span>
+        </a>
+        <div className="nav-links">
+          {SECCIONES.map((s) => (
+            <a key={s.href} href={s.href}>
+              {s.label}
+            </a>
+          ))}
+        </div>
+        <a className="btn btn-wa" href={WA_GENERICO} target="_blank" rel="noopener">
+          <WhatsappIcon />
+          <span className="wa-txt">WhatsApp</span>
+        </a>
+        <button
+          ref={burgerRef}
+          className="burger"
+          type="button"
+          aria-expanded={abierto}
+          aria-controls="navPanel"
+          aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
+          onClick={() => setAbierto((v) => !v)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
+      <div
+        ref={panelRef}
+        id="navPanel"
+        className={abierto ? "nav-panel open" : "nav-panel"}
+      >
+        {SECCIONES.map((s) => (
+          <a key={s.href} href={s.href} onClick={() => setAbierto(false)}>
+            {s.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+}
