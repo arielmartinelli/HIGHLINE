@@ -61,24 +61,28 @@ p{margin:0}
 .nav-links a:hover{color:var(--text)}
 .nav .btn-wa{margin-left:18px}
 .nav-panel-wa{display:none}
-.burger{display:none;width:44px;height:44px;flex:none;border-radius:10px;
-  background:var(--surface);border:1px solid var(--line);cursor:pointer;padding:0;place-items:center}
+.burger{display:none;width:46px;height:46px;flex:none;border-radius:12px;
+  background:var(--surface);border:1px solid var(--line);cursor:pointer;padding:0;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  transition:background .18s ease,border-color .18s ease}
 .burger:hover{border-color:var(--muted)}
-.burger span{display:block;width:20px;height:2px;margin:2.5px 0;background:var(--text);
-  border-radius:2px;transition:transform .2s ease,opacity .18s ease}
+.burger[aria-expanded="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.burger span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;
+  transition:transform .24s cubic-bezier(.4,0,.2,1),opacity .16s ease,width .24s ease}
+.burger span:nth-child(2){width:13px}
 .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0;width:20px}
 .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .nav-panel,.nav-panel-info{display:none}
 @media (max-width:880px){
   .nav-links{display:none}
   .nav-in .btn-wa{display:none}
-  .burger{display:grid;margin-left:auto}
+  .burger{display:flex;margin-left:auto}
   .nav-in{height:60px}
   /* Menu a pantalla completa: arranca debajo de la barra y tapa el resto */
   .nav-panel{
     display:flex;flex-direction:column;
-    position:fixed;left:0;right:0;top:60px;bottom:0;
+    position:fixed;left:0;right:0;top:60px;bottom:0;z-index:79;
     background:var(--bg);
     padding:24px 20px calc(24px + env(safe-area-inset-bottom));
     overflow-y:auto;opacity:0;visibility:hidden;pointer-events:none;

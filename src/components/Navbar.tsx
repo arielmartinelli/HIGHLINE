@@ -47,7 +47,8 @@ export default function Navbar() {
   }, [abierto]);
 
   return (
-    <nav className="nav">
+    <>
+      <nav className="nav">
       <div className="wrap nav-in">
         <a className="logo" href="#top">
           HIGH<span>LINE</span>
@@ -76,7 +77,9 @@ export default function Navbar() {
           <span />
           <span />
         </button>
-      </div>
+        </div>
+      </nav>
+      {/* Fuera del <nav>: su backdrop-filter sería bloque contenedor del fixed */}
       <div
         ref={panelRef}
         id="navPanel"
@@ -101,6 +104,6 @@ export default function Navbar() {
           {TEL_DISPLAY} · Lun a Vie 9 a 17:30 · Sáb 9 a 13
         </p>
       </div>
-    </nav>
+    </>
   );
 }
