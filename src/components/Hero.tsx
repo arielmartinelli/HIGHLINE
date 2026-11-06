@@ -42,17 +42,6 @@ export default function Hero() {
               Ver lo que hacemos
             </a>
           </div>
-          <div className="hero-facts">
-            <span className="fact">
-              <b>Lun a Vie</b> 9:00 a 17:30
-            </span>
-            <span className="fact">
-              <b>Sábados</b> 9:00 a 13:00
-            </span>
-            <span className="fact">
-              Atención <b>con turno previo</b>
-            </span>
-          </div>
         </div>
       </div>
     </header>

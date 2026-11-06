@@ -57,7 +57,7 @@ export default function Navbar() {
         </div>
         <a className="btn btn-wa" href={WA_GENERICO} target="_blank" rel="noopener">
           <WhatsappIcon />
-          <span className="wa-txt">WhatsApp</span>
+          WhatsApp
         </a>
         <button
           ref={burgerRef}
@@ -83,6 +83,16 @@ export default function Navbar() {
             {s.label}
           </a>
         ))}
+        <a
+          className="btn btn-wa nav-panel-wa"
+          href={WA_GENERICO}
+          target="_blank"
+          rel="noopener"
+          onClick={() => setAbierto(false)}
+        >
+          <WhatsappIcon size={17} />
+          Consultar por WhatsApp
+        </a>
       </div>
     </nav>
   );
